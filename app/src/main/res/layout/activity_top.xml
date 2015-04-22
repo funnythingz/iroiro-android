@@ -12,7 +12,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:background="#aa5fff"
-        android:id="@+id/iro1"></RelativeLayout>
+        android:id="@+id/iro1" />
 
     <RelativeLayout
         android:layout_width="90dp"

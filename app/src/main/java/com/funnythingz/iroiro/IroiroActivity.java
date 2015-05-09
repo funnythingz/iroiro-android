@@ -12,6 +12,6 @@ public class IroiroActivity extends Activity {
         setContentView(R.layout.activity_iroiro);
 
         GridView iroiroView = (GridView)findViewById(R.id.iroiroView);
-        //iroiroView.setAdapter(new HueAdapter(this));
+        iroiroView.setAdapter(new IroHueAdapter(this));
     }
 }

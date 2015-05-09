@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/iroView"
+        android:id="@+id/iroImageView"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
@@ -17,10 +17,10 @@
         android:text="Hello IroIro"
         android:textSize="14dp"
         android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/iroView"
+        android:layout_alignBottom="@+id/iroImageView"
         android:gravity="center_vertical|center_horizontal"
         android:textColor="#ffffff"
         android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/iroView"
-        android:layout_alignStart="@+id/iroView" />
+        android:layout_alignEnd="@+id/iroImageView"
+        android:layout_alignStart="@+id/iroImageView" />
 </RelativeLayout>

@@ -6,8 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.makeramen.roundedimageview.RoundedImageView;
 
 public class IroHueAdapter extends BaseAdapter {
 
@@ -21,7 +22,7 @@ public class IroHueAdapter extends BaseAdapter {
     };
 
     private static class ViewHolder {
-        public ImageView iroImageView;
+        public RoundedImageView iroRoundedImageView;
         public TextView iroTextView;
     }
 
@@ -52,14 +53,15 @@ public class IroHueAdapter extends BaseAdapter {
 
         if (convertView == null) {
             convertView = mLayoutInflater.inflate(R.layout.iro_hue, null);
-            holder.iroImageView = (ImageView)convertView.findViewById(R.id.iroImageView);
+            holder.iroRoundedImageView = (RoundedImageView)convertView.findViewById(R.id.iroRoundedImageView);
             holder.iroTextView = (TextView)convertView.findViewById(R.id.iroTextView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.iroImageView.setBackgroundColor(Color.parseColor('#' + iroHueList[position]));
+        holder.iroRoundedImageView.setBackgroundColor(Color.parseColor('#' + iroHueList[position]));
+
         holder.iroTextView.setText(iroHueList[position]);
 
         return convertView;

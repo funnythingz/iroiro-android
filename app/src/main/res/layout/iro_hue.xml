@@ -4,16 +4,17 @@
 
     <ImageView
         android:id="@+id/iroImageView"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="5dp"
         android:layout_centerHorizontal="true"
-        android:background="#9c27b0"
+        android:background="#000000"
         android:layout_alignParentEnd="false" />
 
     <TextView
         android:id="@+id/iroTextView"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:text="Hello IroIro"
         android:textSize="14dp"
         android:layout_alignParentTop="true"

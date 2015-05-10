@@ -1,7 +1,10 @@
 package com.funnythingz.iroiro;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.PaintDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.makeramen.roundedimageview.RoundedImageView;
+
+import java.util.logging.Logger;
 
 public class IroHueAdapter extends BaseAdapter {
 
@@ -65,18 +70,23 @@ public class IroHueAdapter extends BaseAdapter {
         }
 
         holder.iroRoundedImageView.setBackgroundColor(Color.parseColor('#' + iroHueList[position]));
-        holder.iroRoundedImageView.setOnClickListener(openIroView());
+        holder.iroRoundedImageView.setOnClickListener(openIroView(holder));
 
         holder.iroTextView.setText(iroHueList[position]);
 
         return convertView;
     }
 
-    private View.OnClickListener openIroView() {
+    private View.OnClickListener openIroView(final ViewHolder viewHolder) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 YoYo.with(Techniques.Pulse).duration(100).playOn(v);
+                Intent intent = new Intent(mContext, IroActivity.class);
+                intent.putExtra("text", viewHolder.iroTextView.getText());
+                //intent.putExtra("color", viewHolder.iroRoundedImageView.getBackground());
+                //intent.putExtra("color", ((ColorDrawable) v.getBackground()).getColor());
+                mContext.startActivity(intent);
             }
         };
     }

@@ -2,12 +2,15 @@ package com.funnythingz.iroiro;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 public class IroHueAdapter extends BaseAdapter {
@@ -55,15 +58,26 @@ public class IroHueAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.iro_hue, null);
             holder.iroRoundedImageView = (RoundedImageView)convertView.findViewById(R.id.iroRoundedImageView);
             holder.iroTextView = (TextView)convertView.findViewById(R.id.iroTextView);
+            YoYo.with(Techniques.Tada).playOn(holder.iroRoundedImageView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder)convertView.getTag();
         }
 
         holder.iroRoundedImageView.setBackgroundColor(Color.parseColor('#' + iroHueList[position]));
+        holder.iroRoundedImageView.setOnClickListener(openIroView());
 
         holder.iroTextView.setText(iroHueList[position]);
 
         return convertView;
+    }
+
+    private View.OnClickListener openIroView() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                YoYo.with(Techniques.Pulse).duration(100).playOn(v);
+            }
+        };
     }
 }

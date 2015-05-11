@@ -70,22 +70,22 @@ public class IroHueAdapter extends BaseAdapter {
         }
 
         holder.iroRoundedImageView.setBackgroundColor(Color.parseColor('#' + iroHueList[position]));
-        holder.iroRoundedImageView.setOnClickListener(openIroView(holder));
+        holder.iroRoundedImageView.setOnClickListener(openIroView('#' + iroHueList[position], '#' + iroHueList[position]));
 
         holder.iroTextView.setText(iroHueList[position]);
 
         return convertView;
     }
 
-    private View.OnClickListener openIroView(final ViewHolder viewHolder) {
+    private View.OnClickListener openIroView(final String text,
+                                             final String colorCode) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 YoYo.with(Techniques.Pulse).duration(100).playOn(v);
                 Intent intent = new Intent(mContext, IroActivity.class);
-                intent.putExtra("text", viewHolder.iroTextView.getText());
-                //intent.putExtra("color", viewHolder.iroRoundedImageView.getBackground());
-                //intent.putExtra("color", ((ColorDrawable) v.getBackground()).getColor());
+                intent.putExtra("text", text);
+                intent.putExtra("colorCode", colorCode);
                 mContext.startActivity(intent);
             }
         };

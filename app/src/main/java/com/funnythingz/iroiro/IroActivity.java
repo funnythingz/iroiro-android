@@ -14,10 +14,10 @@ public class IroActivity extends Activity {
 
         TextView iroView = (TextView)findViewById(R.id.iroView);
         String text = getIntent().getStringExtra("text");
-        String color = getIntent().getParcelableExtra("color");
+        String colorCode = getIntent().getStringExtra("colorCode");
 
         iroView.setText(text);
-        iroView.setBackgroundColor(Color.parseColor(color));
+        iroView.setBackgroundColor(Color.parseColor(colorCode));
     }
 
 }

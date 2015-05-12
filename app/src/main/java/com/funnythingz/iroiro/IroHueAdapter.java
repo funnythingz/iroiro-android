@@ -3,9 +3,6 @@ package com.funnythingz.iroiro;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.PaintDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +12,6 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.makeramen.roundedimageview.RoundedImageView;
-
-import java.util.logging.Logger;
 
 public class IroHueAdapter extends BaseAdapter {
 

@@ -55,7 +55,7 @@ public class IroAdapter extends BaseAdapter {
         ViewHolder holder = new ViewHolder();
 
         if (convertView == null) {
-            convertView = mLayoutInflater.inflate(R.layout.iro_hue, null);
+            convertView = mLayoutInflater.inflate(R.layout.iro_item, null);
             holder.iroRoundedImageView = (RoundedImageView)convertView.findViewById(R.id.iroRoundedImageView);
             holder.iroTextView = (TextView)convertView.findViewById(R.id.iroTextView);
             YoYo.with(Techniques.Tada).playOn(holder.iroRoundedImageView);

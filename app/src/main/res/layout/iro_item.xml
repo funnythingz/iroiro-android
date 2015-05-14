@@ -35,6 +35,7 @@
         android:layout_alignBottom="@+id/iroRoundedImageView"
         android:gravity="center_vertical|center_horizontal"
         android:textColor="#ffffff"
+        android:ellipsize="end"
         android:layout_centerVertical="true"
         android:layout_alignEnd="@+id/iroRoundedImageView"
         android:layout_alignStart="@+id/iroRoundedImageView" />

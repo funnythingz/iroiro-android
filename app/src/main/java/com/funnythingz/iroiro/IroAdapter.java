@@ -13,7 +13,7 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.makeramen.roundedimageview.RoundedImageView;
 
-public class IroHueAdapter extends BaseAdapter {
+public class IroAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
@@ -29,7 +29,7 @@ public class IroHueAdapter extends BaseAdapter {
         public TextView iroTextView;
     }
 
-    public IroHueAdapter(Context context) {
+    public IroAdapter(Context context) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
     }

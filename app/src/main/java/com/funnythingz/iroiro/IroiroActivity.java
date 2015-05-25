@@ -27,7 +27,7 @@ public class IroiroActivity extends Activity {
         GridView iroiroView = (GridView)findViewById(R.id.iroiroView);
         iroiroView.setAdapter(new IroAdapter(this));
 
-        String apiUrl = "http://192.168.137.177:8000/v1/iroiro?access_key=unkounko";
+        String apiUrl = "http://iroiro.space/v1/colors";
         mQueue = Volley.newRequestQueue(this);
         mQueue.add(new JsonObjectRequest(Request.Method.GET, apiUrl,
                 new Response.Listener<JSONObject>() {

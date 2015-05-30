@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.funnythingz.iroiro.domain.Iro;
+import com.funnythingz.iroiro.domain.IroFactory;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.json.JSONObject;
@@ -23,32 +24,27 @@ public class IroAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    private String[] iroHueList = {
-            "ef5350", "ec407a", "ab47bc", "7e57c2", "5c6bc0", "42a5f5",
-            "29b6f6", "26c6da", "26a69a", "66bb6a", "9ccc65", "d4e157",
-            "ffee58", "ffca28", "ffa726", "ff5722", "795548", "9e9e9e",
-            "607d8b"
-    };
+    private ArrayList<Iro> mIroArrayList;
 
     private static class ViewHolder {
         public RoundedImageView iroRoundedImageView;
         public TextView iroTextView;
     }
 
-    private JSONObject iroiroJson;
-    public IroAdapter(Context context) {
+    public IroAdapter(Context context, ArrayList<Iro> iroArrayList) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
+        mIroArrayList = iroArrayList;
     }
 
     @Override
     public int getCount() {
-        return iroHueList.length;
+        return mIroArrayList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return iroHueList[position];
+        return mIroArrayList.get(position);
     }
 
     @Override
@@ -71,10 +67,10 @@ public class IroAdapter extends BaseAdapter {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        holder.iroRoundedImageView.setBackgroundColor(Color.parseColor('#' + iroHueList[position]));
-        holder.iroRoundedImageView.setOnClickListener(openIroView('#' + iroHueList[position], '#' + iroHueList[position]));
+        holder.iroRoundedImageView.setBackgroundColor(Color.parseColor(mIroArrayList.get(position).color.code));
+        holder.iroRoundedImageView.setOnClickListener(openIroView(mIroArrayList.get(position).content, mIroArrayList.get(position).color.code));
 
-        holder.iroTextView.setText(iroHueList[position]);
+        holder.iroTextView.setText(mIroArrayList.get(position).content);
 
         return convertView;
     }

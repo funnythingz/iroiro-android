@@ -1,9 +1,9 @@
 package com.funnythingz.iroiro.domain;
 
 public class Iro {
-    protected int id;
-    protected Color color;
-    protected String content;
+    public int id;
+    public Color color;
+    public String content;
 
     public Iro(int id, Color color, String content) {
         this.id = id;

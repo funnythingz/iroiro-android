@@ -42,7 +42,7 @@ public class IroiroActivity extends Activity {
                         ArrayList<Iro> iroArrayList = iroFactory.createIroIro();
 
                         GridView iroiroView = (GridView)findViewById(R.id.iroiroView);
-                        iroiroView.setAdapter(new IroAdapter(selfIroIroActivity));
+                        iroiroView.setAdapter(new IroAdapter(selfIroIroActivity, iroArrayList));
                     }
                 },
                 new Response.ErrorListener() {

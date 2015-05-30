@@ -15,7 +15,7 @@ public class IroFactory {
     public ArrayList<Iro> createIroIro() {
         //TODO
         ArrayList<Iro> iroArrayList = new ArrayList<Iro>();
-        iroArrayList.add(new Iro(1, new Color("red", "#ff0000"), "今日はAndroidアプリ頑張ってつくったぞ"));
+        iroArrayList.add(new Iro(1, new Color("red", "#ff0000", "#000000"), "今日はAndroidアプリ頑張ってつくったぞ"));
         return iroArrayList;
     }
 }

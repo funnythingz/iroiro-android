@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.GridView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -39,7 +40,11 @@ public class IroiroActivity extends Activity {
         mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
 
         mQueue = Volley.newRequestQueue(this);
-        mQueue.add(new JsonObjectRequest(Request.Method.GET, mApiUrl,
+        resolveIroIro();
+    }
+
+    private void resolveIroIro() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, mApiUrl,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
@@ -61,28 +66,35 @@ public class IroiroActivity extends Activity {
                         Log.d("VolleyError", volleyError.getMessage());
                     }
                 }
+        );
+
+        // リトライポリシーの設定
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
         ));
+
+        mQueue.add(request);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        resolveIroIro();
     }
 
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            // 3秒待機
+            // 1秒待機
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    self.onRestart();
-                    Log.d("refresh", "yeah!");
-
                     mSwipeRefreshLayout.setRefreshing(false);
-                    Log.d("run", "yeah!");
+                    self.onRestart();
                 }
-            }, 3000);
+            }, 1000);
         }
     };
 }

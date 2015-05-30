@@ -2,6 +2,8 @@ package com.funnythingz.iroiro;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.GridView;
 
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 
 public class IroiroActivity extends Activity {
 
+    private final IroiroActivity self = this;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private RequestQueue mQueue;
     private String mApiUrl = "http://iroiro.space/v1/iroiro";
@@ -30,7 +34,9 @@ public class IroiroActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iroiro);
 
-        final IroiroActivity selfIroIroActivity = this;
+        // SwipeRefreshLayoutの設定
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
+        mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
 
         mQueue = Volley.newRequestQueue(this);
         mQueue.add(new JsonObjectRequest(Request.Method.GET, mApiUrl,
@@ -46,7 +52,7 @@ public class IroiroActivity extends Activity {
                         }
 
                         GridView iroiroView = (GridView)findViewById(R.id.iroiroView);
-                        iroiroView.setAdapter(new IroAdapter(selfIroIroActivity, iroArrayList));
+                        iroiroView.setAdapter(new IroAdapter(self, iroArrayList));
                     }
                 },
                 new Response.ErrorListener() {
@@ -57,4 +63,26 @@ public class IroiroActivity extends Activity {
                 }
         ));
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            // 3秒待機
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    self.onRestart();
+                    Log.d("refresh", "yeah!");
+
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    Log.d("run", "yeah!");
+                }
+            }, 3000);
+        }
+    };
 }

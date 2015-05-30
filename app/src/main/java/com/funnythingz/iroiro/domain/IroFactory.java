@@ -1,14 +1,10 @@
 package com.funnythingz.iroiro.domain;
 
-import android.util.Log;
-
-import org.apache.http.protocol.ResponseDate;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class IroFactory {
 

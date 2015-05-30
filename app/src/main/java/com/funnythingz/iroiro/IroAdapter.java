@@ -12,9 +12,12 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.funnythingz.iroiro.domain.Iro;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class IroAdapter extends BaseAdapter {
 

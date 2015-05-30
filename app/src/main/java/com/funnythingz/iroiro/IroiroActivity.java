@@ -11,8 +11,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.funnythingz.iroiro.domain.Iro;
+import com.funnythingz.iroiro.domain.IroFactory;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class IroiroActivity extends Activity {
 
@@ -24,8 +28,7 @@ public class IroiroActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iroiro);
 
-        GridView iroiroView = (GridView)findViewById(R.id.iroiroView);
-        iroiroView.setAdapter(new IroAdapter(this));
+        final IroiroActivity selfIroIroActivity = this;
 
         String apiUrl = "http://iroiro.space/v1/colors";
         mQueue = Volley.newRequestQueue(this);
@@ -34,6 +37,12 @@ public class IroiroActivity extends Activity {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
                         Log.d("yyyyyy", jsonObject.toString());
+
+                        IroFactory iroFactory = new IroFactory(jsonObject);
+                        ArrayList<Iro> iroArrayList = iroFactory.createIroIro();
+
+                        GridView iroiroView = (GridView)findViewById(R.id.iroiroView);
+                        iroiroView.setAdapter(new IroAdapter(selfIroIroActivity));
                     }
                 },
                 new Response.ErrorListener() {

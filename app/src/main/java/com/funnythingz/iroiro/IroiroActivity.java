@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.funnythingz.iroiro.domain.Iro;
 import com.funnythingz.iroiro.domain.IroFactory;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class IroiroActivity extends Activity {
 
 
     private RequestQueue mQueue;
+    private String mApiUrl = "http://iroiro.space/v1/iroiro";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +32,18 @@ public class IroiroActivity extends Activity {
 
         final IroiroActivity selfIroIroActivity = this;
 
-        String apiUrl = "http://iroiro.space/v1/colors";
         mQueue = Volley.newRequestQueue(this);
-        mQueue.add(new JsonObjectRequest(Request.Method.GET, apiUrl,
+        mQueue.add(new JsonObjectRequest(Request.Method.GET, mApiUrl,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        Log.d("yyyyyy", jsonObject.toString());
-
                         IroFactory iroFactory = new IroFactory(jsonObject);
-                        ArrayList<Iro> iroArrayList = iroFactory.createIroIro();
+                        ArrayList<Iro> iroArrayList = null;
+                        try {
+                            iroArrayList = iroFactory.createIroIro();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                         GridView iroiroView = (GridView)findViewById(R.id.iroiroView);
                         iroiroView.setAdapter(new IroAdapter(selfIroIroActivity, iroArrayList));

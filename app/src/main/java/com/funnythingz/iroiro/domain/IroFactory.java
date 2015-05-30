@@ -1,21 +1,42 @@
 package com.funnythingz.iroiro.domain;
 
+import android.util.Log;
+
+import org.apache.http.protocol.ResponseDate;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class IroFactory {
 
-    protected JSONObject jsonObject;
+    protected JSONObject mJsonObject;
 
     public IroFactory(JSONObject jsonObject) {
-        this.jsonObject = jsonObject;
+        mJsonObject = jsonObject;
     }
 
-    public ArrayList<Iro> createIroIro() {
-        //TODO
+    public ArrayList<Iro> createIroIro() throws JSONException {
+
+        JSONArray iroiroJsonArray = mJsonObject.getJSONArray("iroiro");
+
         ArrayList<Iro> iroArrayList = new ArrayList<Iro>();
-        iroArrayList.add(new Iro(1, new Color("red", "#ff0000", "#000000"), "今日はAndroidアプリ頑張ってつくったぞ"));
+        int len = iroiroJsonArray.length();
+        for(int i = 0; i < len; i++) {
+            JSONObject iro = iroiroJsonArray.getJSONObject(i);
+            int iroId = iro.getInt("id");
+            JSONObject colorJsonObject = iro.getJSONObject("color");
+            String colorName = colorJsonObject.getString("name");
+            String colorCode = colorJsonObject.getString("code");
+            String colorTextCode = colorJsonObject.getString("text_code");
+            String content = iro.getString("content");
+
+            Color color = new Color(colorName, colorCode, colorTextCode);
+            iroArrayList.add(new Iro(iroId, color, content));
+        }
+
         return iroArrayList;
     }
 }

@@ -1,5 +1,7 @@
 package com.funnythingz.iroiro.domain;
 
+import org.json.JSONObject;
+
 public class Color {
     public String name;
     public String code;

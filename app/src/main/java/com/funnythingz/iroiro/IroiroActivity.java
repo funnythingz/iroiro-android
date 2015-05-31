@@ -1,10 +1,15 @@
 package com.funnythingz.iroiro;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -20,6 +25,7 @@ import com.funnythingz.iroiro.domain.IroFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 public class IroiroActivity extends Activity {
@@ -30,6 +36,8 @@ public class IroiroActivity extends Activity {
     private RequestQueue mQueue;
     private String mApiUrl = "http://iroiro.space/v1/iroiro";
 
+    private Button mNewIroButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,16 @@ public class IroiroActivity extends Activity {
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
         mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
+
+        mNewIroButton = (Button) findViewById(R.id.new_iro_button);
+
+        mNewIroButton.setOnClickListener(new View.OnClickListener() {
+            Intent newIroIntent = new Intent(getApplicationContext(), NewIroActivity.class);
+            @Override
+            public void onClick(View v) {
+                startActivity(newIroIntent);
+            }
+        });
 
         mQueue = Volley.newRequestQueue(this);
         resolveIroIro();

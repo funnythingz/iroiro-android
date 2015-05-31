@@ -3,7 +3,6 @@ package com.funnythingz.iroiro;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,7 @@ import android.widget.TextView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.funnythingz.iroiro.domain.Iro;
-import com.funnythingz.iroiro.domain.IroFactory;
 import com.makeramen.roundedimageview.RoundedImageView;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 

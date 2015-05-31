@@ -35,7 +35,6 @@ public class IroiroActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iroiro);
 
-        // SwipeRefreshLayoutの設定
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh);
         mSwipeRefreshLayout.setOnRefreshListener(mOnRefreshListener);
 

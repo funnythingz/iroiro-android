@@ -87,7 +87,6 @@ public class IroiroActivity extends Activity {
     private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            // 1秒待機
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

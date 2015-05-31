@@ -1,9 +1,9 @@
 package com.funnythingz.iroiro;
 
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -22,6 +22,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class NewIroActivity extends Activity {
+
+    private final NewIroActivity self = this;
 
     private RequestQueue mQueue;
     private String mApiUrl = "http://iroiro.space/v1/colors";
@@ -48,10 +50,12 @@ public class NewIroActivity extends Activity {
                             e.printStackTrace();
                         }
 
-                        //TODO: カラーリストを表示
-
-                        RelativeLayout newIroLayout = (RelativeLayout)findViewById(R.id.new_iro_layout);
+                        RelativeLayout newIroLayout = (RelativeLayout)findViewById(R.id.newIroLayout);
                         newIroLayout.setBackgroundColor(android.graphics.Color.parseColor(colorsArrayList.get(0).code));
+
+                        //TODO: カラーリストを表示
+                        GridView colorsView = (GridView)findViewById(R.id.colorsView);
+                        colorsView.setAdapter(new ColorAdapter(self, colorsArrayList, newIroLayout));
                     }
                 },
                 new Response.ErrorListener() {

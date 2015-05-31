@@ -15,6 +15,7 @@
         -->
 
     <com.makeramen.roundedimageview.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/iroRoundedImageView"
         android:layout_width="72dp"
         android:layout_height="72dp"
@@ -22,7 +23,9 @@
         android:layout_centerHorizontal="true"
         android:background="#000000"
         android:layout_alignParentEnd="false"
-        app:riv_corner_radius="5dip"
+        app:riv_corner_radius="5dp"
+        app:riv_oval="true"
+        app:riv_mutate_background="true"
         />
 
     <TextView

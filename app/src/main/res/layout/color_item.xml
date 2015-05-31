@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/colorSelectView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:background="#000000"
+        android:layout_alignParentEnd="false"
+        app:riv_border_color="#000000"
+        app:riv_border_width="1dp"
+        app:riv_mutate_background="true"
+        app:riv_corner_radius="5dp"
+        app:riv_oval="true"
+        />
+
+</RelativeLayout>

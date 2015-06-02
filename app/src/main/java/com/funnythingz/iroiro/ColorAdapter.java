@@ -70,8 +70,8 @@ public class ColorAdapter extends BaseAdapter {
             public void onClick(View v) {
 
                 //アニメーション
-                YoYo.with(Techniques.Flash)
-                        .duration(500)
+                YoYo.with(Techniques.RubberBand)
+                        .duration(300)
                         .playOn(v);
 
                 //TODO: 色を選択

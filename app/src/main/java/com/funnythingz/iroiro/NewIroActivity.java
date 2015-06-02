@@ -3,7 +3,12 @@ package com.funnythingz.iroiro;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -55,6 +60,11 @@ public class NewIroActivity extends Activity {
 
                         //TODO: カラーリストを表示
                         GridView colorsView = (GridView)findViewById(R.id.colorsView);
+                        ViewGroup.LayoutParams layoutParams = colorsView.getLayoutParams();
+                        final float scale = getResources().getDisplayMetrics().density; // dpで入力したいので変換用scaleをセット
+                        layoutParams.width = (int) ((colorsArrayList.size() * 48) * scale); // px * scale = dp
+                        Log.d("width", "" + layoutParams.width);
+                        colorsView.setLayoutParams(layoutParams);
                         colorsView.setAdapter(new ColorAdapter(self, colorsArrayList, newIroLayout));
                     }
                 },

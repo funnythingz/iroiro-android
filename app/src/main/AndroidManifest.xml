@@ -28,6 +28,7 @@
             android:name=".NewIroActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             />
     </application>
 

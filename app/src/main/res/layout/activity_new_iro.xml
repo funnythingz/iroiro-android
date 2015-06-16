@@ -10,10 +10,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_alignParentTop="true"
+        android:id="@+id/HeaderLayout">
+
+        <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme"
+            android:minHeight="60dp"
+            android:background="#f7f8f9"
+            android:id="@+id/NewIroToolbar"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_alignWithParentIfMissing="false"
-        android:id="@+id/SelectColorLayout">
+        android:id="@+id/SelectColorLayout"
+        android:layout_below="@+id/HeaderLayout"
+        android:layout_alignParentStart="true">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -53,9 +71,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/SelectColorLayout"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/SelectColorLayout">
 
         <EditText
             android:layout_width="match_parent"

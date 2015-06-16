@@ -2,8 +2,12 @@ package com.funnythingz.iroiro;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.GridView;
@@ -26,20 +30,37 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class NewIroActivity extends Activity {
+
+public class NewIroActivity extends AppCompatActivity {
 
     private final NewIroActivity self = this;
 
     private RequestQueue mQueue;
     private String mApiUrl = "http://iroiro.space/v1/colors";
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_iro);
 
+        setToolbar();
+
         mQueue = Volley.newRequestQueue(this);
         resolveSelectColors();
+    }
+
+    private void setToolbar() {
+        mToolbar = (Toolbar) findViewById(R.id.NewIroToolbar);
+        mToolbar.setTitle("New Iro");
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void resolveSelectColors() {

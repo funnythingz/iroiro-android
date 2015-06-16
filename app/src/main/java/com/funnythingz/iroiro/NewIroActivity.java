@@ -1,18 +1,13 @@
 package com.funnythingz.iroiro;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -53,12 +48,25 @@ public class NewIroActivity extends AppCompatActivity {
     private void setToolbar() {
         mToolbar = (Toolbar) findViewById(R.id.NewIroToolbar);
         mToolbar.setTitle("New Iro");
+
         setSupportActionBar(mToolbar);
+
+        // 戻るボタン
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
+            }
+        });
+
+        // 投稿ボタン
+        mToolbar.inflateMenu(R.menu.new_iro_actions);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                // TODO: menu click
+                return true;
             }
         });
     }

@@ -49,24 +49,23 @@ public class NewIroActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.NewIroToolbar);
         mToolbar.setTitle("New Iro");
 
-        setSupportActionBar(mToolbar);
-
-        // 戻るボタン
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        mToolbar.inflateMenu(R.menu.new_iro_actions);
 
         // 投稿ボタン
-        mToolbar.inflateMenu(R.menu.new_iro_actions);
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 // TODO: menu click
                 return true;
+            }
+        });
+
+        // 戻るボタン
+        mToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }

@@ -11,37 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentTop="true">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
-            android:ems="10"
-            android:id="@+id/editText"
-            android:maxLength="140"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:textColor="#000000"
-            android:textSize="28dp"
-            android:padding="15dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="20dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignWithParentIfMissing="false">
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="false"
+        android:id="@+id/SelectColorLayout">
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -74,6 +46,37 @@
             </LinearLayout>
 
         </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/SelectColorLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:maxLength="140"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:textColor="#000000"
+            android:textSize="28dp"
+            android:padding="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="20dp" />
 
     </LinearLayout>
 

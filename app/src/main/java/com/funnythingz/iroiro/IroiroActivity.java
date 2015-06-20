@@ -31,7 +31,7 @@ public class IroiroActivity extends Activity {
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private RequestQueue mQueue;
-    private String mApiUrl = "http://iroiro.space/v1/iroiro";
+    private String mApiUrl = "http://iroiro.space/v1/iroiro?access_key=unkounko";
 
     private Button mNewIroButton;
 

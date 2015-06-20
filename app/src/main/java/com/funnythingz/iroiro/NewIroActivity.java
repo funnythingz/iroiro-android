@@ -31,7 +31,7 @@ public class NewIroActivity extends AppCompatActivity {
     private final NewIroActivity self = this;
 
     private RequestQueue mQueue;
-    private String mApiUrl = "http://iroiro.space/v1/colors";
+    private String mApiUrl = "http://iroiro.space/v1/colors?access_key=unkounko";
     private Toolbar mToolbar;
 
     @Override

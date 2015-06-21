@@ -30,6 +30,13 @@ public class IroiroActivity extends Activity {
 
     private Button mNewIroButton;
 
+    private RestAdapter restAdapter = new RestAdapter.Builder()
+            .setConverter(new GsonConverter(new Gson()))
+            .setEndpoint("http://iroiro.space/v1")
+            .build();
+
+    private IroIroAPI iroIroAPI = restAdapter.create(IroIroAPI.class);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +60,6 @@ public class IroiroActivity extends Activity {
     }
 
     private void resolveIroIro() {
-
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setConverter(new GsonConverter(new Gson()))
-                .setEndpoint("http://iroiro.space/v1")
-                .build();
-
-        IroIroAPI iroIroAPI = restAdapter.create(IroIroAPI.class);
         iroIroAPI.getIroIro()
                 .subscribeOn(newThread())
                 .observeOn(mainThread())

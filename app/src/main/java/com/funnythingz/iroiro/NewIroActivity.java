@@ -9,9 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.funnythingz.iroiro.domain.Color;
 import com.funnythingz.iroiro.infrastructure.ColorAPI;
+import com.funnythingz.iroiro.infrastructure.IroIroAPI;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -32,6 +34,14 @@ public class NewIroActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
+    private RestAdapter restAdapter = new RestAdapter.Builder()
+            .setConverter(new GsonConverter(new Gson()))
+            .setEndpoint("http://iroiro.space/v1")
+            .build();
+
+    private IroIroAPI iroiroAPI = restAdapter.create(IroIroAPI.class);
+    private ColorAPI colorAPI = restAdapter.create(ColorAPI.class);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +60,9 @@ public class NewIroActivity extends AppCompatActivity {
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                // TODO: menu click
+                //TextView textView = (TextView) findViewById(R.id.editText);
+                //iroiroAPI.postNewIro(textView.getText().toString(), 1, 0);
+                iroiroAPI.postNewIro("hogehoge", 1);
                 return true;
             }
         });
@@ -66,13 +78,6 @@ public class NewIroActivity extends AppCompatActivity {
     }
 
     private void resolveSelectColors() {
-
-        RestAdapter restAdapter = new RestAdapter.Builder()
-                .setConverter(new GsonConverter(new Gson()))
-                .setEndpoint("http://iroiro.space/v1")
-                .build();
-
-        ColorAPI colorAPI = restAdapter.create(ColorAPI.class);
         colorAPI.getColors()
                 .subscribeOn(newThread())
                 .observeOn(mainThread())

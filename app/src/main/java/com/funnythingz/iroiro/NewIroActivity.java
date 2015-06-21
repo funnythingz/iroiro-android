@@ -1,5 +1,6 @@
 package com.funnythingz.iroiro;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,10 +17,15 @@ import com.funnythingz.iroiro.infrastructure.ColorAPI;
 import com.funnythingz.iroiro.infrastructure.IroIroAPI;
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import retrofit.RestAdapter;
+import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
+import retrofit.mime.TypedByteArray;
 import rx.Observer;
 import rx.Scheduler;
 import rx.Subscription;
@@ -60,9 +66,58 @@ public class NewIroActivity extends AppCompatActivity {
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                //TextView textView = (TextView) findViewById(R.id.editText);
-                //iroiroAPI.postNewIro(textView.getText().toString(), 1, 0);
-                iroiroAPI.postNewIro("hogehoge", 1);
+                TextView textView = (TextView) findViewById(R.id.editText);
+
+                // TODO: 色の選択
+                iroiroAPI.postNewIro(textView.getText().toString(), 1)
+                        .subscribeOn(newThread())
+                        .observeOn(mainThread())
+                        .subscribe(new Observer<Response>() {
+
+                            private Boolean flg = false;
+
+                            private Boolean isFlg() {
+                                return flg;
+                            }
+
+                            @Override
+                            public void onCompleted() {
+                                if (isFlg()) {
+                                    onBackPressed();
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                Log.e("error", e.toString());
+                            }
+
+                            @Override
+                            public void onNext(Response response) {
+                                // 返ってきたJSONをパース
+                                JSONObject responseJson = null;
+                                try {
+                                    responseJson = new JSONObject(new String(((TypedByteArray) response.getBody()).getBytes()));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                // Validates
+                                try {
+                                    // TODO:
+                                    // エラーメッセージがあればアラート出す
+                                    AlertDialog.Builder ab = new AlertDialog.Builder(NewIroActivity.this);
+                                    AlertDialog alertDialog = ab.create();
+                                    alertDialog.setTitle("Error");
+                                    alertDialog.setMessage((CharSequence) responseJson.getJSONArray("Message").get(0));
+                                    alertDialog.show();
+                                } catch (JSONException e) {
+                                    // エラーがなければ終了
+                                    e.printStackTrace();
+                                    flg = true;
+                                }
+                            }
+                        });
                 return true;
             }
         });

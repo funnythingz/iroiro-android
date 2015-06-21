@@ -1,15 +1,17 @@
 package com.funnythingz.iroiro.domain;
 
-import org.json.JSONObject;
+import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@Generated("org.jsonschema2pojo")
 
 public class Color {
+    @JsonProperty("name")
     public String name;
-    public String code;
-    public String textCode;
 
-    public Color(String name, String code, String textCode) {
-        this.name = name;
-        this.code = code;
-        this.textCode = textCode;
-    }
+    @JsonProperty("code")
+    public String code;
+
+    @JsonProperty("text_code")
+    public String textCode;
 }

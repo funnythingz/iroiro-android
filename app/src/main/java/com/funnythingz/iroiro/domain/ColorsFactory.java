@@ -27,7 +27,7 @@ public class ColorsFactory {
             String colorCode = color.getString("code");
             String colorTextCode = color.getString("text_code");
 
-            colorsArrayList.add(new Color(colorName, colorCode, colorTextCode));
+            //colorsArrayList.add(new Color(colorName, colorCode, colorTextCode));
         }
 
         return colorsArrayList;

@@ -1,13 +1,17 @@
 package com.funnythingz.iroiro.domain;
 
-public class Iro {
-    public int id;
-    public Color color;
-    public String content;
+import javax.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    public Iro(int id, Color color, String content) {
-        this.id = id;
-        this.color = color;
-        this.content = content;
-    }
+@Generated("org.jsonschema2pojo")
+
+public class Iro {
+    @JsonProperty("id")
+    public int id;
+
+    @JsonProperty("color")
+    public Color color;
+
+    @JsonProperty("content")
+    public String content;
 }

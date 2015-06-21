@@ -67,7 +67,11 @@ public class IroAdapter extends BaseAdapter {
         holder.iroRoundedImageView.setOnClickListener(openIroView(mIroArrayList.get(position).content, mIroArrayList.get(position).color.code));
 
         holder.iroTextView.setText(mIroArrayList.get(position).content);
-        holder.iroTextView.setTextColor(Color.parseColor(mIroArrayList.get(position).color.textCode));
+        if(mIroArrayList.get(position).color.textCode == null) {
+            holder.iroTextView.setTextColor(Color.BLACK);
+        } else {
+            holder.iroTextView.setTextColor(Color.parseColor(mIroArrayList.get(position).color.textCode));
+        }
 
         return convertView;
     }

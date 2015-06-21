@@ -10,28 +10,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.funnythingz.iroiro.domain.Iro;
-import com.funnythingz.iroiro.domain.IroFactory;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.funnythingz.iroiro.infrastructure.IroIroAPI;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+
+import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
+import rx.Observer;
+
+import static rx.android.schedulers.AndroidSchedulers.*;
+import static rx.schedulers.Schedulers.*;
 
 public class IroiroActivity extends Activity {
 
     private final IroiroActivity self = this;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
-    private RequestQueue mQueue;
-    private String mApiUrl = "http://iroiro.space/v1/iroiro?access_key=unkounko";
 
     private Button mNewIroButton;
 
@@ -59,38 +56,54 @@ public class IroiroActivity extends Activity {
     }
 
     private void resolveIroIro() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, mApiUrl,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        IroFactory iroFactory = new IroFactory(jsonObject);
-                        ArrayList<Iro> iroArrayList = null;
-                        try {
-                            iroArrayList = iroFactory.createIroIro();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
 
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setConverter(new GsonConverter(new Gson()))
+                .setEndpoint("http://iroiro.space/v1")
+                .build();
+
+        IroIroAPI iroIroAPI = restAdapter.create(IroIroAPI.class);
+        iroIroAPI.getIroIro()
+                .subscribeOn(newThread())
+                .observeOn(mainThread())
+                .subscribe(new Observer<ArrayList<Iro>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("error", e.toString());
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<Iro> iroArrayList) {
                         GridView iroiroView = (GridView)findViewById(R.id.iroiroView);
                         iroiroView.setAdapter(new IroAdapter(self, iroArrayList));
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Log.d("VolleyError", volleyError.getMessage());
-                    }
-                }
-        );
+                });
 
-        // リトライポリシーの設定
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-        ));
+        // /iroiro/:id
+        // 単体で取得
+        //iroIroAPI.getIro(1)
+        //        .subscribeOn(newThread())
+        //        .observeOn(mainThread())
+        //        .subscribe(new Observer<Iro>() {
+        //            @Override
+        //            public void onCompleted() {
+        //            }
 
-        mQueue.add(request);
+        //            @Override
+        //            public void onError(Throwable e) {
+        //                Log.e("error", e.toString());
+        //            }
+
+        //            @Override
+        //            public void onNext(Iro iro) {
+        //                Log.d("iro_id: ", "" + iro.id);
+        //                Log.d("iro_content: ", iro.content);
+        //            }
+        //        });
     }
 
     @Override

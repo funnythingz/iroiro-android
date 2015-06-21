@@ -29,8 +29,8 @@ public class IroFactory {
             String colorTextCode = colorJsonObject.getString("text_code");
             String content = iro.getString("content");
 
-            Color color = new Color(colorName, colorCode, colorTextCode);
-            iroArrayList.add(new Iro(iroId, color, content));
+            //Color color = new Color(colorName, colorCode, colorTextCode);
+            //iroArrayList.add(new Iro(iroId, color, content));
         }
 
         return iroArrayList;

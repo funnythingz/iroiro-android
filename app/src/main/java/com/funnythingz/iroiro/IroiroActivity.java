@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 
-import com.android.volley.toolbox.Volley;
 import com.funnythingz.iroiro.domain.Iro;
 import com.funnythingz.iroiro.infrastructure.IroIroAPI;
 import com.google.gson.Gson;
@@ -50,7 +49,6 @@ public class IroiroActivity extends Activity {
             }
         });
 
-        mQueue = Volley.newRequestQueue(this);
         resolveIroIro();
     }
 

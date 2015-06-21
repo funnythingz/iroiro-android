@@ -79,28 +79,6 @@ public class IroiroActivity extends Activity {
                         iroiroView.setAdapter(new IroAdapter(self, iroArrayList));
                     }
                 });
-
-        // /iroiro/:id
-        // 単体で取得
-        //iroIroAPI.getIro(1)
-        //        .subscribeOn(newThread())
-        //        .observeOn(mainThread())
-        //        .subscribe(new Observer<Iro>() {
-        //            @Override
-        //            public void onCompleted() {
-        //            }
-
-        //            @Override
-        //            public void onError(Throwable e) {
-        //                Log.e("error", e.toString());
-        //            }
-
-        //            @Override
-        //            public void onNext(Iro iro) {
-        //                Log.d("iro_id: ", "" + iro.id);
-        //                Log.d("iro_content: ", iro.content);
-        //            }
-        //        });
     }
 
     @Override

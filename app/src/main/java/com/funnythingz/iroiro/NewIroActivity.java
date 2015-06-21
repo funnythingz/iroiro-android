@@ -104,7 +104,6 @@ public class NewIroActivity extends AppCompatActivity {
 
                                 // Validates
                                 try {
-                                    // TODO:
                                     // エラーメッセージがあればアラート出す
                                     AlertDialog.Builder ab = new AlertDialog.Builder(NewIroActivity.this);
                                     AlertDialog alertDialog = ab.create();
@@ -151,12 +150,11 @@ public class NewIroActivity extends AppCompatActivity {
                         RelativeLayout newIroLayout = (RelativeLayout) findViewById(R.id.newIroLayout);
                         newIroLayout.setBackgroundColor(android.graphics.Color.parseColor(colorArrayList.get(0).code));
 
-                        //TODO: カラーリストを表示
+                        // カラーリストを表示
                         GridView colorsView = (GridView) findViewById(R.id.colorsView);
                         ViewGroup.LayoutParams layoutParams = colorsView.getLayoutParams();
                         final float scale = getResources().getDisplayMetrics().density; // dpで入力したいので変換用scaleをセット
                         layoutParams.width = (int) ((colorArrayList.size() * 48) * scale); // px * scale = dp
-                        Log.d("width", "" + layoutParams.width);
                         colorsView.setLayoutParams(layoutParams);
                         colorsView.setAdapter(new ColorAdapter(self, colorArrayList, newIroLayout));
                     }

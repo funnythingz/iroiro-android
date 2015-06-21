@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 
-import com.android.volley.toolbox.Volley;
 import com.funnythingz.iroiro.domain.Color;
 import com.funnythingz.iroiro.infrastructure.ColorAPI;
 import com.google.gson.Gson;

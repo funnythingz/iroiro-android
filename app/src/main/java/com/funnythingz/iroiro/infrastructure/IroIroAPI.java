@@ -1,11 +1,7 @@
 package com.funnythingz.iroiro.infrastructure;
 
 import com.funnythingz.iroiro.domain.Iro;
-
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit.http.GET;
 import retrofit.http.Path;

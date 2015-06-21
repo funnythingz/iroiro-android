@@ -10,38 +10,34 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.funnythingz.iroiro.domain.Color;
-import com.funnythingz.iroiro.domain.ColorsFactory;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.funnythingz.iroiro.infrastructure.ColorAPI;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+
+import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
+import rx.Observer;
+import rx.Scheduler;
+import rx.Subscription;
+
+import static rx.android.schedulers.AndroidSchedulers.*;
+import static rx.schedulers.Schedulers.*;
 
 
 public class NewIroActivity extends AppCompatActivity {
 
     private final NewIroActivity self = this;
 
-    private RequestQueue mQueue;
-    private String mApiUrl = "http://iroiro.space/v1/colors?access_key=unkounko";
     private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_iro);
-
         setToolbar();
-
-        mQueue = Volley.newRequestQueue(this);
         resolveSelectColors();
     }
 
@@ -71,46 +67,40 @@ public class NewIroActivity extends AppCompatActivity {
     }
 
     private void resolveSelectColors() {
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, mApiUrl,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        ColorsFactory colorsFactory = new ColorsFactory(jsonObject);
-                        ArrayList<Color> colorsArrayList = null;
-                        try {
-                            colorsArrayList = colorsFactory.createColors();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
 
-                        RelativeLayout newIroLayout = (RelativeLayout)findViewById(R.id.newIroLayout);
-                        newIroLayout.setBackgroundColor(android.graphics.Color.parseColor(colorsArrayList.get(0).code));
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setConverter(new GsonConverter(new Gson()))
+                .setEndpoint("http://iroiro.space/v1")
+                .build();
+
+        ColorAPI colorAPI = restAdapter.create(ColorAPI.class);
+        colorAPI.getColors()
+                .subscribeOn(newThread())
+                .observeOn(mainThread())
+                .subscribe(new Observer<ArrayList<Color>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("error", e.toString());
+                    }
+
+                    @Override
+                    public void onNext(ArrayList<Color> colorArrayList) {
+                        RelativeLayout newIroLayout = (RelativeLayout) findViewById(R.id.newIroLayout);
+                        newIroLayout.setBackgroundColor(android.graphics.Color.parseColor(colorArrayList.get(0).code));
 
                         //TODO: カラーリストを表示
-                        GridView colorsView = (GridView)findViewById(R.id.colorsView);
+                        GridView colorsView = (GridView) findViewById(R.id.colorsView);
                         ViewGroup.LayoutParams layoutParams = colorsView.getLayoutParams();
                         final float scale = getResources().getDisplayMetrics().density; // dpで入力したいので変換用scaleをセット
-                        layoutParams.width = (int) ((colorsArrayList.size() * 48) * scale); // px * scale = dp
+                        layoutParams.width = (int) ((colorArrayList.size() * 48) * scale); // px * scale = dp
                         Log.d("width", "" + layoutParams.width);
                         colorsView.setLayoutParams(layoutParams);
-                        colorsView.setAdapter(new ColorAdapter(self, colorsArrayList, newIroLayout));
+                        colorsView.setAdapter(new ColorAdapter(self, colorArrayList, newIroLayout));
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Log.d("VolleyError", volleyError.getMessage());
-                    }
-                }
-        );
-
-        // リトライポリシーの設定
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-        ));
-
-        mQueue.add(request);
+                });
     }
 }

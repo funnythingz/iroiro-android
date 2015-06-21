@@ -69,7 +69,7 @@ public class NewIroActivity extends AppCompatActivity {
                 TextView textView = (TextView) findViewById(R.id.editText);
 
                 // TODO: 色の選択
-                iroiroAPI.postNewIro(textView.getText().toString(), 1)
+                iroiroAPI.postNewIro(textView.getText().toString(), 2)
                         .subscribeOn(newThread())
                         .observeOn(mainThread())
                         .subscribe(new Observer<Response>() {

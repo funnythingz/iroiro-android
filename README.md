@@ -1,3 +1,3 @@
-# iroiro Android
+# IROIRO Android
 
-&copy; funnythingz &amp; yunico
+&copy; funnythingz
